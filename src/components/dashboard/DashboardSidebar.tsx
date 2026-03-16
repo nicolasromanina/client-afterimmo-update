@@ -29,8 +29,8 @@ interface SidebarItem {
 }
 
 const menuItems: SidebarItem[] = [
-  { icon: LayoutDashboard, label: 'Tableau de bord', active: true },
-  { icon: User, label: 'Mon profil' },
+  { icon: LayoutDashboard, label: 'Tableau de bord', path: '/' },
+  { icon: User, label: 'Mon profil', path: '/profil' },
   { icon: FolderOpen, label: 'Mes projets' },
   { icon: FileText, label: 'Documents' },
   { icon: Users, label: 'Partenaires' },
