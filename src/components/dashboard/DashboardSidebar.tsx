@@ -80,7 +80,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, onClose, ac
               <button
                 key={item.label}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200
-                  ${item.active
+                  ${item.label === activeItem
                     ? 'bg-fi-dark text-primary-foreground shadow-md'
                     : 'text-fi-gray-600 hover:bg-fi-gray-100 hover:text-foreground'
                   }

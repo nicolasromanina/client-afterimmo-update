@@ -72,7 +72,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ title = 'Bonjour et B
         {/* Welcome text */}
         <div className="text-center pb-8 pt-2 sm:pb-10 sm:pt-4">
           <h1 className="text-2xl sm:text-3xl font-medium text-primary-foreground">
-            Bonjour et Bienvenue
+            {title}
           </h1>
         </div>
       </div>
