@@ -8,47 +8,51 @@ import logoIcon from '@/assets/logo-icon.png';
 
 const DashboardFooter: React.FC = () => {
   return (
-    <footer className="relative w-full mt-12 overflow-hidden">
+    <footer className="relative w-full overflow-hidden rounded-[28px] bg-fi-dark shadow-[0_16px_38px_rgba(0,0,0,0.25)]">
       {/* Background */}
       <img
         src={footerBg}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover opacity-90"
       />
       <div className="absolute inset-0 bg-foreground/80" />
 
       {/* Content */}
-      <div className="relative z-10 px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
+      <div className="relative z-10 px-5 sm:px-7 lg:px-10 py-10 sm:py-14">
         {/* Logo centered */}
-        <div className="flex items-center justify-center gap-2 mb-10">
-          <img src={logoIcon} alt="First Immo" className="w-7 h-7 object-contain" />
-          <span className="text-primary-foreground font-bold text-lg tracking-tight">
-            FIRST IMMO
-          </span>
+        <div className="mb-10 flex items-center justify-center gap-2">
+          <img src={logoIcon} alt="Afterimmo" className="" />
+          
         </div>
 
         {/* Grid content */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto mb-10">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-3">
           {/* Description */}
           <div>
-            <p className="text-primary-foreground/60 text-sm leading-relaxed">
+            <p className="text-[12px] leading-relaxed text-primary-foreground/60">
               Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
             </p>
           </div>
 
           {/* Useful links */}
           <div>
-            <h4 className="text-primary-foreground font-bold text-sm mb-3 uppercase tracking-wider">
-              Liens Utiles
+            <h4 className="mb-3 text-[12px] font-bold uppercase tracking-wider text-primary-foreground">
+              Liens utiles
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors">
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
                   Nos projets
                 </a>
               </li>
               <li>
-                <a href="#" className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors">
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
                   Annuaires
                 </a>
               </li>
@@ -57,23 +61,32 @@ const DashboardFooter: React.FC = () => {
 
           {/* Legal pages */}
           <div>
-            <h4 className="text-primary-foreground font-bold text-sm mb-3 uppercase tracking-wider">
-              Pages Légales
+            <h4 className="mb-3 text-[12px] font-bold uppercase tracking-wider text-primary-foreground">
+              Pages légales
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors">
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
                   Politique de confidentialité
                 </a>
               </li>
               <li>
-                <a href="#" className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors">
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
                   Conditions général d'utilisation
                 </a>
               </li>
               <li>
-                <a href="#" className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors">
-                  Mention Légales
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
+                  Mention légales
                 </a>
               </li>
             </ul>
@@ -81,10 +94,10 @@ const DashboardFooter: React.FC = () => {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-primary-foreground/10 max-w-4xl mx-auto mb-6" />
+        <div className="mx-auto my-8 max-w-4xl border-t border-primary-foreground/10" />
 
         {/* Copyright */}
-        <p className="text-center text-primary-foreground/50 text-sm">
+        <p className="text-center text-[12px] text-primary-foreground/50">
           Copyright-Tout droit reservés
         </p>
       </div>

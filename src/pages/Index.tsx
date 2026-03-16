@@ -1,6 +1,6 @@
 /**
  * Dashboard Page (Index) - Main client dashboard for First Immo
- * Layout: Full-width header → Sidebar + Content area → Footer
+ * Layout: Header (pill) -> Sidebar + Content area -> Footer (pill)
  * Responsive: sidebar collapses to hamburger on mobile
  */
 import React, { useState } from 'react';
@@ -20,21 +20,24 @@ const Index: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Full-width header */}
-      <DashboardHeader />
+      {/* Page container keeps header, content, and footer aligned */}
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10">
+        <DashboardHeader />
+      </div>
 
       {/* Main content area with sidebar */}
-      <div className="px-4 sm:px-6 lg:px-10 py-6 lg:py-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         {/* Mobile menu toggle */}
         <button
           className="lg:hidden mb-4 flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           onClick={() => setSidebarOpen(true)}
+          aria-label="Ouvrir le menu"
         >
           <Menu size={20} />
           Menu
         </button>
 
-        <div className="flex gap-6 lg:gap-8">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* Sidebar */}
           <div className="flex-shrink-0">
             <DashboardSidebar
@@ -69,9 +72,11 @@ const Index: React.FC = () => {
                   promoter="Marc.H"
                   location="Almadies"
                   type="Immeuble"
-                  score={30}
-                  subScore={31}
+                  score={50}
+                  subScore={61}
                   certified
+                  featuredLabel="Sponsorisé"
+                  featuredTone="orange"
                 />
                 <ProjectCard
                   image={project2}
@@ -81,9 +86,11 @@ const Index: React.FC = () => {
                   promoter="Marie.H"
                   location="Almadies"
                   type="Immeuble"
-                  score={30}
-                  subScore={69}
+                  score={50}
+                  subScore={61}
                   certified
+                  featuredLabel="En avant VIP"
+                  featuredTone="blue"
                 />
               </div>
             </div>
@@ -92,7 +99,9 @@ const Index: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <DashboardFooter />
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-10 lg:pb-14">
+        <DashboardFooter />
+      </div>
     </div>
   );
 };

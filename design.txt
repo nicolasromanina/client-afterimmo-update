@@ -1,0 +1,325 @@
+//Sidebard
+
+/**
+ * DashboardSidebar - Left navigation sidebar
+ * Contains menu items with icons matching the design
+ * "Tableau de bord" is the active item (dark pill background)
+ * Bottom has "Paramètres" link
+ */
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  BarChart3,
+  BellRing,
+  Calculator,
+  CreditCard,
+  Diamond,
+  FileText,
+  FolderOpen,
+  LayoutDashboard,
+  Settings,
+  Star,
+  User,
+  Users,
+  X,
+} from 'lucide-react';
+
+interface SidebarItem {
+  icon: React.ElementType;
+  label: string;
+  path?: string;
+}
+
+const menuItems: SidebarItem[] = [
+  { icon: LayoutDashboard, label: 'Tableau de bord', path: '/' },
+  { icon: User, label: 'Mon profil', path: '/profil' },
+  { icon: FolderOpen, label: 'Mes projets' },
+  { icon: FileText, label: 'Documents' },
+  { icon: Users, label: 'Partenaires' },
+  { icon: BarChart3, label: 'Comparer' },
+  { icon: Star, label: 'Mes Avis' },
+  { icon: BellRing, label: 'Alertes' },
+  { icon: Calculator, label: 'Calculateur de rentabilité' },
+  { icon: Diamond, label: 'Comparateur Premium', path: '/comparateur-premium'},
+  { icon: CreditCard, label: 'Abonnement' },
+];
+
+interface DashboardSidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+  activeItem?: string;
+}
+
+const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
+  isOpen,
+  onClose,
+  activeItem = 'Tableau de bord',
+}) => {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-foreground/30 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      <aside
+        className={`fixed left-0 top-0 z-50 h-full w-[255px] rounded-r-[26px] bg-card shadow-[0_16px_30px_rgba(0,0,0,0.10)] lg:sticky lg:top-28 lg:h-fit lg:rounded-[26px] lg:z-10 
+          transition-transform duration-300 ease-in-out
+          ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}
+        aria-label="Menu latéral"
+      >
+        {/* Mobile close button */}
+        <button
+          className="absolute right-4 top-4 text-muted-foreground lg:hidden"
+          onClick={onClose}
+          aria-label="Fermer le menu"
+        >
+          <X size={20} />
+        </button>
+
+        <div className="flex h-full flex-col p-4">
+          {/* Menu items */}
+          <nav className="space-y-1">
+            {menuItems.map((item) => (
+              <button
+                key={item.label}
+                onClick={() => item.path && navigate(item.path)}
+                className={`flex w-full items-center gap-3 rounded-[14px] px-4 py-3 text-[13px] font-medium transition-all duration-200
+                  ${
+                    item.label === activeItem
+                      ? 'bg-fi-dark text-primary-foreground shadow-[0_8px_18px_rgba(0,0,0,0.25)]'
+                      : 'text-fi-gray-600 hover:bg-fi-gray-100 hover:text-foreground'
+                  }
+                `}
+              >
+                <item.icon size={16} strokeWidth={item.label === activeItem ? 2.4 : 2} />
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          {/* Settings at bottom */}
+          <div className="mt-6 border-t border-border pt-4">
+            <button className="flex w-full items-center gap-3 rounded-[14px] px-4 py-3 text-[13px] font-medium text-fi-gray-600 transition-colors hover:bg-fi-gray-100 hover:text-foreground">
+              <Settings size={16} />
+              <span>Paramètres</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+    </>
+  );
+};
+
+export default DashboardSidebar;
+
+
+
+
+
+//header
+
+/**
+ * DashboardHeader - Top pill header with diagonal background
+ * Contains: Logo, nav links, notification icons, user disconnect button
+ * Welcome message displayed below the nav
+ */
+import React from 'react';
+import { Bell, ChevronDown, Mail, User } from 'lucide-react';
+import headerBg from '@/assets/header-bg.jpg';
+import logoIcon from '@/assets/logo-icon.png';
+
+interface DashboardHeaderProps {
+  title: string;
+}
+
+const DashboardHeader: React.FC<DashboardHeaderProps> = ({ title = 'Bonjour et Bienvenue' }) => {
+  return (
+    <header className="relative w-full min-h-[150px] overflow-hidden rounded-[28px] bg-fi-dark shadow-[0_14px_36px_rgba(0,0,0,0.28)]">
+      {/* Background image (diagonal stripes) */}
+      <img
+        src={headerBg}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover opacity-90"
+      />
+
+      {/* Content overlay */}
+      <div className="relative z-10 px-5 sm:px-7 lg:px-10 pt-4 sm:pt-5 pb-6 sm:pb-7">
+        {/* Top navigation bar */}
+        <div className="flex items-center justify-between gap-3">
+          {/* Brand */}
+          <div className="flex items-center gap-2">
+            <img src={logoIcon} alt="Afterimmo" className="" />
+          </div>
+
+          {/* Center nav links */}
+          <nav className="hidden md:flex items-center rounded-full border border-white/15 bg-[#2b2b2b]/80 px-2 py-1 shadow-inner backdrop-blur">
+            {['Accueil', 'Annuaires', 'Nos projets'].map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="px-4 py-2 text-[13px] font-medium text-primary-foreground/90 hover:text-primary-foreground transition-colors"
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <button
+              className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              aria-label="Messages"
+            >
+              <Mail size={18} />
+            </button>
+            <button
+              className="relative text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              aria-label="Notifications"
+            >
+              <Bell size={18} />
+              {/* Notification dot */}
+              <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary" />
+            </button>
+
+            {/* Disconnect button */}
+            <button className="flex items-center gap-2 rounded-full bg-primary px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90">
+              {/* Avatar placeholder */}
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-foreground/20">
+                <User size={14} />
+              </span>
+              <span className="hidden sm:inline">Se Déconnecter</span>
+              <ChevronDown size={14} />
+            </button>
+          </div>
+        </div>
+
+        {/* Welcome text */}
+        <div className="text-center pt-5 sm:pt-6">
+          <h1 className="text-[22px] sm:text-[26px] font-medium text-primary-foreground">
+            {title}
+          </h1>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default DashboardHeader;
+
+
+// Footer
+/**
+ * DashboardFooter - Dark footer with geometric background
+ * Contains: Logo, description text, useful links, legal pages, copyright
+ */
+import React from 'react';
+import footerBg from '@/assets/footer-bg.jpg';
+import logoIcon from '@/assets/logo-icon.png';
+
+const DashboardFooter: React.FC = () => {
+  return (
+    <footer className="relative w-full overflow-hidden rounded-[28px] bg-fi-dark shadow-[0_16px_38px_rgba(0,0,0,0.25)]">
+      {/* Background */}
+      <img
+        src={footerBg}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover opacity-90"
+      />
+      <div className="absolute inset-0 bg-foreground/80" />
+
+      {/* Content */}
+      <div className="relative z-10 px-5 sm:px-7 lg:px-10 py-10 sm:py-14">
+        {/* Logo centered */}
+        <div className="mb-10 flex items-center justify-center gap-2">
+          <img src={logoIcon} alt="Afterimmo" className="" />
+          
+        </div>
+
+        {/* Grid content */}
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 sm:grid-cols-3">
+          {/* Description */}
+          <div>
+            <p className="text-[12px] leading-relaxed text-primary-foreground/60">
+              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
+            </p>
+          </div>
+
+          {/* Useful links */}
+          <div>
+            <h4 className="mb-3 text-[12px] font-bold uppercase tracking-wider text-primary-foreground">
+              Liens utiles
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
+                  Nos projets
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
+                  Annuaires
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal pages */}
+          <div>
+            <h4 className="mb-3 text-[12px] font-bold uppercase tracking-wider text-primary-foreground">
+              Pages légales
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
+                  Politique de confidentialité
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
+                  Conditions général d'utilisation
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-[12px] text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                >
+                  Mention légales
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="mx-auto my-8 max-w-4xl border-t border-primary-foreground/10" />
+
+        {/* Copyright */}
+        <p className="text-center text-[12px] text-primary-foreground/50">
+          Copyright-Tout droit reservés
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default DashboardFooter;
